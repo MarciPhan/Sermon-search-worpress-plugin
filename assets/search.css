@@ -1,0 +1,389 @@
+/*
+ * Bible Search – vzhled sladěný se šablonou „Baptisté Jablonec Theme“:
+ * karty .hero-card (12px, stín), pole jako vyhledávání v hlavičce, tlačítka .btn-hero-solid,
+ * čipy jako přepínač jazyka, akcent #f7cece ze sekce Vyznání. Vše omezeno na .bsw-app.
+ */
+body .bsw-app {
+  --bsw-red: var(--primary-red, #BF0001);
+  --bsw-red-light: var(--light-red, #DD100E);
+  --bsw-text: var(--dark-gray, #383535);
+  --bsw-black: var(--black, #000);
+  --bsw-muted: #555;
+  --bsw-line: #eee;
+  --bsw-soft: var(--off-white, #f9f9f9);
+  --bsw-pink: #f7cece;
+  --bsw-card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --bsw-ease: var(--transition, all 0.3s cubic-bezier(0.4, 0, 0.2, 1));
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--bsw-text);
+  margin: 0 auto 1rem;
+  text-align: left;
+}
+body .bsw-app *, body .bsw-app *::before, body .bsw-app *::after { box-sizing: border-box; }
+body .bsw-app a { color: inherit; text-decoration: none !important; transition: var(--bsw-ease); }
+body .bsw-app h2, body .bsw-app h3 { font-family: 'Outfit', sans-serif; font-weight: 600; color: var(--bsw-black); margin: 0; padding: 0; border: 0; }
+body .bsw-app p { margin: 0; padding: 0; }
+body .bsw-app ul, body .bsw-app li { margin: 0; padding: 0; }
+
+/* ---------- vyhledávací karta ---------- */
+body .bsw-hero {
+  background: #fff; border-radius: 12px; box-shadow: var(--bsw-card-shadow);
+  padding: 2.5rem; text-align: center;
+}
+body .bsw-hero.is-compact { padding: 1.6rem 2rem; }
+body .bsw-eyebrow { display: none; }
+body .bsw-app .bsw-title { font-size: 1.8rem; margin-bottom: 0.6rem; line-height: 1.2; }
+body .bsw-hero.is-compact .bsw-title { font-size: 1.4rem; margin-bottom: 0.9rem; }
+body .bsw-lead { max-width: 620px; margin: 0 auto 1.6rem !important; color: var(--bsw-muted); }
+body .bsw-hero.is-compact .bsw-lead { display: none; }
+
+body .bsw-tabs { display: flex; justify-content: center; gap: 0.8rem; flex-wrap: wrap; margin: 0 auto 1.4rem; }
+body .bsw-tabs a {
+  padding: 0.6rem 1.6rem; border-radius: 50px; font-weight: 600; font-size: 0.95rem;
+  border: 2px solid var(--bsw-text); color: var(--bsw-text);
+}
+
+body .bsw-tabs a.is-active {
+  background: var(--bsw-red); border-color: var(--bsw-red); color: #fff;
+  box-shadow: 0 5px 15px rgba(191, 0, 1, 0.3);
+}
+
+body .bsw-search {
+  max-width: 720px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+  background: var(--bsw-soft); border: 1px solid var(--bsw-line); border-radius: 50px;
+  padding: 0.35rem 0.35rem 0.35rem 1.2rem; transition: var(--bsw-ease);
+}
+body .bsw-search:focus-within { border-color: var(--bsw-red); background: #fff; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06); }
+body .bsw-app .bsw-search input, body .bsw-app .bsw-search select {
+  flex: 1; min-width: 0; border: 0; outline: none; background: transparent; box-shadow: none; margin: 0; height: auto;
+  padding: 0.75rem 0.4rem; font-family: 'Montserrat', sans-serif; font-size: 1rem; color: var(--bsw-text);
+  -webkit-appearance: none; appearance: none;
+}
+body .bsw-app .bsw-search select { flex: 2; cursor: pointer; background-image: linear-gradient(45deg, transparent 50%, #888 50%), linear-gradient(135deg, #888 50%, transparent 50%); background-position: calc(100% - 14px) 52%, calc(100% - 9px) 52%; background-size: 5px 5px; background-repeat: no-repeat; padding-right: 1.6rem; }
+body .bsw-app .bsw-search input[type=number] { flex: 0 1 7rem; border-left: 1px solid #e3e3e3; padding: 0.75rem 0.8rem; -moz-appearance: textfield; }
+body .bsw-app .bsw-search input[type=number]:invalid { color: var(--bsw-red); }
+body .bsw-app .bsw-search button {
+  border: 0; border-radius: 50px; padding: 0.8rem 2rem; cursor: pointer; margin: 0;
+  background: var(--bsw-red); color: #fff; font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 600;
+  box-shadow: 0 5px 15px rgba(191, 0, 1, 0.3); transition: var(--bsw-ease);
+}
+body .bsw-app .bsw-search button:hover, body .bsw-app .bsw-search button:focus-visible {
+  background: var(--bsw-red-light); box-shadow: 0 8px 20px rgba(191, 0, 1, 0.4);
+}
+body .bsw-limit { flex-basis: 100%; text-align: center; color: var(--bsw-red); font-size: 0.85rem; font-weight: 600; }
+body .bsw-limit:empty { display: none; }
+body .bsw-filters { flex-basis: 100%; display: flex; justify-content: center; flex-wrap: wrap; gap: 0.4rem 1.2rem; padding: 0 0.8rem 0.2rem 0; }
+body .bsw-filters:empty { display: none; }
+body .bsw-filter { display: inline-flex; align-items: center; gap: 6px; font-size: 0.82rem; color: #777; }
+body .bsw-app .bsw-search .bsw-filter select {
+  flex: none; max-width: 220px; padding: 0.15rem 1.4rem 0.15rem 0.2rem; font-size: 0.82rem; font-weight: 600; color: var(--bsw-text);
+  background-position: calc(100% - 10px) 55%, calc(100% - 5px) 55%;
+}
+
+body .bsw-examples { margin-top: 1.2rem; font-size: 0.85rem; color: #777; }
+body .bsw-examples a {
+  display: inline-flex; align-items: center; height: 32px; margin: 4px 3px; padding: 0 0.9rem; border-radius: 50px;
+  background: var(--bsw-soft); border: 1px solid var(--bsw-line); color: var(--bsw-black); font-weight: 600; font-size: 0.82rem;
+}
+body .bsw-examples a:hover { background: var(--bsw-red); border-color: var(--bsw-red); color: #fff; }
+body .bsw-tip { max-width: 640px; margin: 0.9rem auto 0 !important; font-size: 0.8rem; color: #777; }
+
+body .bsw-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1.2rem 1rem; margin-top: 2rem; padding-top: 1.6rem; border-top: 1px solid var(--bsw-line); }
+body .bsw-stats div { text-align: center; }
+body .bsw-stats strong { display: block; font-family: 'Outfit', sans-serif; font-size: 2rem; font-weight: 600; color: var(--bsw-red); line-height: 1.1; }
+body .bsw-stats span { font-size: 0.8rem; color: #777; }
+
+/* ---------- výsledky ---------- */
+body .bsw-facets-wrap { margin: 0 0 1.2rem; }
+body .bsw-facets-wrap > summary { display: none; }
+body .bsw-full { color: var(--bsw-red) !important; font-weight: 600; white-space: nowrap; }
+body .bsw-full::before { content: ""; display: inline-block; margin-right: 5px; border-left: 7px solid currentColor; border-top: 4px solid transparent; border-bottom: 4px solid transparent; }
+body .bsw-full:hover { color: var(--bsw-red-light) !important; }
+body .bsw-facets {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); align-items: end; gap: 0.7rem 0.8rem; margin: 0;
+  padding: 0.9rem 1rem; background: #fff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+body .bsw-facet { display: flex; flex-direction: column; gap: 0.25rem; min-width: 0; font-size: 0.75rem; color: #777; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+body .bsw-app .bsw-facet select {
+  width: 100%; max-width: none; margin: 0; padding: 0.5rem 1.8rem 0.5rem 0.9rem; text-transform: none; letter-spacing: 0; border-radius: 50px; border: 1px solid var(--bsw-line);
+  background-color: var(--bsw-soft); color: var(--bsw-black); font-family: 'Montserrat', sans-serif; font-size: 0.85rem; font-weight: 600; cursor: pointer;
+  -webkit-appearance: none; appearance: none; height: auto; box-shadow: none;
+  background-image: linear-gradient(45deg, transparent 50%, #888 50%), linear-gradient(135deg, #888 50%, transparent 50%);
+  background-position: calc(100% - 14px) 52%, calc(100% - 9px) 52%; background-size: 5px 5px; background-repeat: no-repeat;
+}
+body .bsw-app .bsw-facet select:hover, body .bsw-app .bsw-facet select:focus { border-color: var(--bsw-red); outline: none; }
+body .bsw-facet-reset { align-self: center; justify-self: start; padding: 0.5rem 0; color: var(--bsw-red) !important; font-weight: 600; font-size: 0.85rem; }
+body .bsw-facet-reset:hover { color: var(--bsw-red-light) !important; }
+
+body .bsw-main { padding: 2.2rem 0 0.5rem; }
+body .bsw-summary { color: var(--bsw-muted); margin: 0 0 1.4rem !important; font-size: 0.95rem; }
+body .bsw-summary strong { color: var(--bsw-black); }
+body .bsw-switch { display: inline-block; margin-left: 0.6rem; color: var(--bsw-red) !important; font-weight: 600; font-size: 0.88rem; }
+body .bsw-switch:hover { color: var(--bsw-red-light) !important; }
+body .bsw-empty { text-align: center; padding: 2.5rem 1.5rem; background: #fff; border-radius: 12px; box-shadow: var(--bsw-card-shadow); }
+body .bsw-app .bsw-empty h3 { margin-bottom: 0.4rem; font-size: 1.4rem; }
+body .bsw-empty p { color: var(--bsw-muted); }
+
+body .bsw-video {
+  background: #fff; border-radius: 12px; box-shadow: var(--bsw-card-shadow);
+  padding: 1.6rem 1.8rem; margin-bottom: 1.4rem; transition: transform 0.3s ease;
+}
+
+body .bsw-video-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+body .bsw-app .bsw-video h3 { font-size: 1.3rem; line-height: 1.3; }
+body .bsw-video h3 a:hover { color: var(--bsw-red); }
+body .bsw-count {
+  flex-shrink: 0; background: var(--bsw-red); color: #fff;
+  font-weight: 700; font-size: 0.78rem; padding: 4px 12px; border-radius: 50px;
+}
+body .bsw-meta { color: #777; font-size: 0.85rem; margin: 4px 0 0.9rem !important; }
+body .bsw-hit { display: flex; gap: 14px; padding: 0.75rem 0; border-top: 1px solid var(--bsw-line); }
+body .bsw-app .bsw-hit a.bsw-t {
+  flex-shrink: 0; align-self: flex-start; display: inline-flex; align-items: center; justify-content: center; gap: 5px;
+  min-width: 78px; height: 32px; padding: 0 0.8rem; border-radius: 50px;
+  background: var(--bsw-soft); border: 1px solid var(--bsw-line); color: var(--bsw-red);
+  font-variant-numeric: tabular-nums; font-weight: 700; font-size: 0.82rem;
+}
+body .bsw-hit a.bsw-t::before { content: ""; border-left: 7px solid currentColor; border-top: 4px solid transparent; border-bottom: 4px solid transparent; }
+body .bsw-app .bsw-hit a.bsw-t:hover, body .bsw-app .bsw-hit a.bsw-t:focus-visible { background: var(--bsw-red); border-color: var(--bsw-red); color: #fff; }
+body .bsw-hit > span { font-size: 0.95rem; color: #444; line-height: 1.7; }
+body .bsw-app mark { background: var(--bsw-pink); color: var(--bsw-black); padding: 0 3px; border-radius: 3px; font-weight: 600; }
+body .bsw-ref { font-family: 'Outfit', sans-serif; font-weight: 600; color: var(--bsw-black); }
+body .bsw-badge {
+  display: inline-block; font-style: normal; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.02em;
+  padding: 1px 9px; border-radius: 50px; border: 1px solid var(--bsw-line); background: var(--bsw-soft); color: #666; vertical-align: 1px;
+}
+body .bsw-badge.main { background: var(--bsw-red); border-color: var(--bsw-red); color: #fff; }
+body .bsw-badge.soft { background: #fff; }
+body .bsw-video details summary {
+  cursor: pointer; color: var(--bsw-red); font-weight: 600; font-size: 0.88rem; padding-top: 0.7rem; list-style: none;
+}
+body .bsw-video details summary::-webkit-details-marker { display: none; }
+body .bsw-video details summary::before { content: "+ "; }
+body .bsw-video details[open] summary::before { content: "− "; }
+
+body .bsw-pages { display: flex; justify-content: center; align-items: center; gap: 1rem; margin: 2rem 0 1rem; font-size: 0.9rem; color: #777; }
+body .bsw-pages a { padding: 0.6rem 1.5rem; border-radius: 50px; border: 2px solid var(--bsw-text); font-weight: 600; color: var(--bsw-text); }
+body .bsw-pages a:hover { background: var(--bsw-text); color: #fff; }
+
+/* ---------- knihy a kapitoly ---------- */
+body .bsw-books { margin-bottom: 2.2rem; }
+body .bsw-app .bsw-books h3 { font-size: 1.4rem; margin: 0 0 1rem; text-align: center; }
+body .bsw-book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 10px; }
+body .bsw-book-grid > a, body .bsw-book-grid > span {
+  display: flex; justify-content: space-between; align-items: center; gap: 8px;
+  padding: 0.7rem 1rem; border-radius: 12px; background: #fff; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  font-weight: 600; font-size: 0.9rem; color: var(--bsw-black);
+}
+
+body .bsw-book-grid small { font-weight: 700; font-size: 0.72rem; color: #fff; background: var(--bsw-red); border-radius: 50px; padding: 1px 8px; }
+body .bsw-book-grid > .is-empty { color: #bbb; background: var(--bsw-soft); box-shadow: none; font-weight: 500; }
+body .bsw-note { font-size: 0.8rem; color: #777; text-align: center; }
+body .bsw-book-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.2rem 0.4rem; margin-bottom: 0.8rem; }
+body .bsw-app .bsw-book-head h3 { font-size: 1.8rem; margin: 0 0.4rem 0 0; }
+body .bsw-chapters { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 0 0 1.6rem; font-size: 0.82rem; }
+body .bsw-chapters > span:first-child { color: #777; margin-right: 4px; }
+body .bsw-chapters a, body .bsw-chapters .is-empty {
+  min-width: 2.3rem; height: 32px; display: inline-flex; align-items: center; justify-content: center; padding: 0 8px;
+  border-radius: 50px; border: 1px solid var(--bsw-line); background: var(--bsw-soft); font-weight: 700; color: var(--bsw-black);
+}
+body .bsw-chapters a:hover { background: var(--bsw-red); border-color: var(--bsw-red); color: #fff; }
+body .bsw-chapters a.is-active { background: var(--bsw-red); border-color: var(--bsw-red); color: #fff; box-shadow: 0 5px 15px rgba(191, 0, 1, 0.3); }
+body .bsw-chapters .is-empty { color: #ccc; background: transparent; border-style: dashed; }
+
+/* ---------- Upozornění na strojové přepisy ---------- */
+body .bsw-about {
+  margin: 0 0 1.4rem; padding: 0.6rem 0.9rem; border-radius: 8px;
+  background: var(--bsw-soft); border: 1px solid var(--bsw-line); color: #555;
+}
+body .bsw-app .bsw-about h3, body .bsw-about h3 { font-size: 0.9rem; margin: 0 0 0.15rem; color: #444; }
+body .bsw-about p { font-size: 0.85rem; line-height: 1.5; margin: 0; text-wrap: pretty; }
+body .bsw-about h3 { text-wrap: balance; }
+body .bsw-topics-progress { text-align: center; font-weight: 600; }
+body .bsw-topics-progress progress { width: min(420px, 100%); display: block; margin: 0.6rem auto 0; }
+
+@media (max-width: 700px) {
+  body .bsw-hero { padding: 1.5rem 1rem; }
+  body .bsw-hero.is-compact { padding: 1.2rem 0.9rem; }
+  body .bsw-app .bsw-title { font-size: 1.4rem; }
+  body .bsw-hero.is-compact .bsw-title { font-size: 1.2rem; }
+  body .bsw-lead { font-size: 0.92rem; margin-bottom: 1.2rem !important; }
+
+  /* Přepínač režimu vždy vedle sebe */
+  body .bsw-tabs { flex-wrap: nowrap; gap: 0.5rem; margin-bottom: 1.1rem; }
+  body .bsw-tabs a { flex: 1 1 0; text-align: center; padding: 0.55rem 0.5rem; font-size: 0.85rem; white-space: nowrap; }
+
+  /* Formulář: pole pod sebou, kapitola a verš vedle sebe */
+  body .bsw-search { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-radius: 16px; padding: 0.4rem; }
+  body .bsw-app .bsw-search input, body .bsw-app .bsw-search select { grid-column: 1 / -1; width: 100%; padding: 0.8rem 0.7rem; font-size: 16px; }
+  body .bsw-app .bsw-search.is-bible input[type=number] { grid-column: auto; border-left: 0; border-top: 1px solid #e3e3e3; }
+  body .bsw-app .bsw-search.is-bible input[name=bsw_vers] { border-left: 1px solid #e3e3e3; }
+  body .bsw-app .bsw-search button { grid-column: 1 / -1; width: 100%; margin-top: 0.4rem; border-radius: 12px; padding: 0.85rem 1rem; }
+  body .bsw-limit { grid-column: 1 / -1; padding: 0.4rem 0 0; }
+
+  body .bsw-facets-wrap > summary {
+    display: inline-flex; align-items: center; gap: 0.5rem; list-style: none; cursor: pointer;
+    padding: 0.5rem 1.1rem; border-radius: 50px; border: 2px solid var(--bsw-text); font-weight: 600; font-size: 0.85rem; color: var(--bsw-text);
+  }
+  body .bsw-facets-wrap > summary::-webkit-details-marker { display: none; }
+  body .bsw-facets-wrap > summary::after { content: ""; width: 6px; height: 6px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg) translateY(-2px); }
+  body .bsw-facets-wrap[open] > summary::after { transform: rotate(-135deg) translateY(-1px); }
+  body .bsw-facets-wrap > summary span { background: var(--bsw-red); color: #fff; border-radius: 50px; padding: 0 7px; font-size: 0.72rem; }
+  body .bsw-facets-wrap[open] > summary { margin-bottom: 0.6rem; }
+  body .bsw-facets { grid-template-columns: 1fr 1fr; gap: 0.45rem 0.5rem; padding: 0.65rem; }
+  body .bsw-facet { font-size: 0.66rem; gap: 0.15rem; }
+  body .bsw-app .bsw-facet select { font-size: 16px; padding: 0.35rem 1.6rem 0.35rem 0.7rem; }
+  body .bsw-facet-reset { grid-column: 1 / -1; justify-self: center; padding: 0.2rem 0; }
+
+  /* Filtry jako řádky: popisek vlevo, výběr vpravo */
+  body .bsw-filters { grid-column: 1 / -1; flex-direction: column; gap: 0; padding: 0.3rem 0.2rem 0; }
+  body .bsw-filter { display: flex; width: 100%; justify-content: space-between; gap: 0.6rem; padding: 0.15rem 0.5rem; border-top: 1px solid #ececec; font-size: 0.85rem; }
+  body .bsw-filter span { flex-shrink: 0; min-width: 4.2rem; }
+  body .bsw-app .bsw-search .bsw-filter select {
+    grid-column: auto; flex: 1; width: auto; min-width: 0; max-width: none; text-align: right; text-align-last: right;
+    font-size: 16px; padding: 0.55rem 1.4rem 0.55rem 0; background-position: calc(100% - 9px) 52%, calc(100% - 4px) 52%;
+  }
+
+  body .bsw-examples a { height: 30px; padding: 0 0.75rem; }
+  body .bsw-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem 0.6rem; margin-top: 1.5rem; padding-top: 1.3rem; }
+  body .bsw-stats strong { font-size: 1.6rem; }
+
+  body .bsw-main { padding-top: 1.6rem; }
+  body .bsw-switch { display: block; margin: 0.2rem 0 0; }
+  body .bsw-video { padding: 1.1rem 1rem; margin-bottom: 1rem; }
+  body .bsw-app .bsw-video h3 { font-size: 1.1rem; }
+  body .bsw-hit { flex-direction: column; gap: 6px; }
+  body .bsw-app .bsw-hit a.bsw-t { min-width: 0; align-self: flex-start; }
+  body .bsw-hit > span { font-size: 0.93rem; }
+
+  body .bsw-book-head { display: block; }
+  body .bsw-app .bsw-book-head h3 { font-size: 1.5rem; }
+  body .bsw-book-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  body .bsw-book-grid > a, body .bsw-book-grid > span { padding: 0.6rem 0.7rem; font-size: 0.85rem; line-height: 1.25; }
+  body .bsw-book-grid > a > span, body .bsw-book-grid > span > span { min-width: 0; overflow-wrap: break-word; -webkit-hyphens: auto; hyphens: auto; }
+  body .bsw-book-grid small { flex-shrink: 0; }
+  body .bsw-chapters a, body .bsw-chapters .is-empty { min-width: 2.2rem; height: 34px; }
+  body .bsw-pages { gap: 0.5rem; font-size: 0.85rem; }
+  body .bsw-pages a { padding: 0.5rem 1rem; }
+  body .bsw-about { padding: 0.6rem 0.8rem; }
+}
+
+/* ==========================================================================
+   Jednotné chování tlačítek: najetí, stisk, klávesnice
+   - hlavní (červená):     najetí = světlejší červená, stisk = tmavší, bílý text
+   - vedlejší (obrys/čip): najetí = červený okraj a text, pozadí zůstává světlé
+   - klávesnice:           červený prstenec jen při :focus-visible
+   ========================================================================== */
+body .bsw-app a, body .bsw-app button, body .bsw-app select, body .bsw-app summary {
+  -webkit-tap-highlight-color: transparent;
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  transform: none !important;
+}
+body .bsw-app a:focus, body .bsw-app button:focus, body .bsw-app select:focus, body .bsw-app summary:focus { outline: none; }
+body .bsw-app a:focus-visible, body .bsw-app button:focus-visible, body .bsw-app select:focus-visible, body .bsw-app summary:focus-visible {
+  outline: 3px solid rgba(191, 0, 1, 0.35); outline-offset: 2px;
+}
+
+/* Hlavní tlačítka */
+body .bsw-app .bsw-search button,
+body .bsw-app .bsw-tabs a.is-active,
+body .bsw-app .bsw-chapters a.is-active {
+  background: var(--bsw-red); border-color: var(--bsw-red); color: #fff !important;
+}
+body .bsw-app .bsw-search button:hover,
+body .bsw-app .bsw-tabs a.is-active:hover,
+body .bsw-app .bsw-chapters a.is-active:hover {
+  background: var(--bsw-red-light); border-color: var(--bsw-red-light); color: #fff !important; box-shadow: 0 6px 18px rgba(191, 0, 1, 0.35);
+}
+body .bsw-app .bsw-search button:active,
+body .bsw-app .bsw-tabs a.is-active:active { background: #a30001; border-color: #a30001; box-shadow: 0 2px 8px rgba(191, 0, 1, 0.3); }
+
+/* Vedlejší tlačítka a čipy */
+body .bsw-app .bsw-tabs a:not(.is-active):hover,
+body .bsw-app .bsw-pages a:hover,
+body .bsw-app .bsw-facets-wrap > summary:hover {
+  background: #fff; border-color: var(--bsw-red); color: var(--bsw-red) !important;
+}
+body .bsw-app .bsw-examples a:hover,
+body .bsw-app .bsw-hit a.bsw-t:hover,
+body .bsw-app .bsw-chapters a:not(.is-active):hover {
+  background: #fff; border-color: var(--bsw-red); color: var(--bsw-red) !important;
+}
+body .bsw-app .bsw-tabs a:not(.is-active):active,
+body .bsw-app .bsw-pages a:active,
+body .bsw-app .bsw-examples a:active,
+body .bsw-app .bsw-hit a.bsw-t:active,
+body .bsw-app .bsw-chapters a:not(.is-active):active { background: var(--bsw-red-soft, #fbeaea); }
+
+/* Karty knih: jen jemné zvýraznění, bez poskakování */
+body .bsw-app .bsw-book-grid > a:hover { color: var(--bsw-red) !important; box-shadow: var(--bsw-card-shadow); }
+body .bsw-app .bsw-video h3 a:hover { color: var(--bsw-red) !important; }
+
+/* Prvky s červeným pozadím mají vždy bílý text */
+body .bsw-app .bsw-count, body .bsw-app .bsw-badge.main, body .bsw-app .bsw-book-grid small,
+body .bsw-app .bsw-facets-wrap > summary span { color: #fff !important; }
+
+/* ---------- řazení výsledků ---------- */
+body .bsw-sort { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.9rem; margin: -0.6rem 0 1.4rem; font-size: 0.88rem; color: var(--bsw-muted); }
+body .bsw-sort strong { color: var(--bsw-black); font-weight: 600; border-bottom: 2px solid var(--bsw-red); }
+body .bsw-app .bsw-sort a { color: var(--bsw-red) !important; font-weight: 600; }
+body .bsw-app .bsw-sort a:hover { color: var(--bsw-red-light) !important; }
+
+/* ---------- přepis kázání ---------- */
+body .bsw-back { margin: 0 0 1rem !important; font-size: 0.9rem; }
+body .bsw-app .bsw-back a { color: var(--bsw-red) !important; font-weight: 600; }
+body .bsw-app .bsw-read { color: var(--bsw-red) !important; font-weight: 600; white-space: nowrap; }
+body .bsw-app .bsw-read:hover { color: var(--bsw-red-light) !important; }
+body .bsw-tr-head { text-align: left; }
+body .bsw-player { position: relative; margin: 0.4rem 0 1.2rem; border-radius: 12px; overflow: hidden; background: #000; aspect-ratio: 16 / 9; max-width: 720px; }
+body .bsw-app .bsw-play { display: block; width: 100%; height: 100%; padding: 0; margin: 0; border: 0; background: #000; cursor: pointer; position: relative; }
+body .bsw-play img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.85; transition: opacity 0.3s ease; }
+body .bsw-play:hover img, body .bsw-play:focus-visible img { opacity: 1; }
+body .bsw-play span {
+  position: absolute; left: 50%; top: 50%; width: 68px; height: 48px; margin: -24px 0 0 -34px;
+  background: var(--bsw-red); border-radius: 14px; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+body .bsw-play span::after { content: ""; position: absolute; left: 27px; top: 14px; border-left: 18px solid #fff; border-top: 10px solid transparent; border-bottom: 10px solid transparent; }
+body .bsw-player iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+body .bsw-app .bsw-tr-search { margin: 0 0 0.6rem; max-width: 520px; }
+body .bsw-tr-found { margin: 0.6rem 0 0 !important; }
+body .bsw-tr-body .bsw-hit:first-child { border-top: 0; }
+body .bsw-tr-body .bsw-hit { scroll-margin-top: 110px; }
+body .bsw-tr-body .bsw-hit:target { background: var(--bsw-soft); border-radius: 8px; }
+body .bsw-transcript .bsw-note { color: #777; font-size: 0.85rem; margin-top: 0.6rem !important; }
+
+@media (max-width: 700px) {
+  body .bsw-sort { margin-top: -0.8rem; }
+  body .bsw-player { border-radius: 8px; }
+}
+
+/* 3.4.0: osnova, odkazy, otázky, témata, sdílení */
+.bsw-chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.bsw-chip{display:inline-block;padding:4px 12px;border:1px solid currentColor;border-radius:999px;font-size:.9em;text-decoration:none;opacity:.85}
+.bsw-chip.is-main{font-weight:600;opacity:1}
+.bsw-chip small{opacity:.7;margin-left:4px}
+.bsw-chip:hover,.bsw-chip:focus-visible{opacity:1;text-decoration:underline}
+.bsw-qlist{list-style:none;margin:8px 0;padding:0}
+.bsw-qlist li{padding:7px 0;border-bottom:1px solid rgba(128,128,128,.25)}
+.bsw-qlist small{opacity:.7;margin-left:6px}
+.bsw-outline ol{margin:8px 0;padding-left:0;list-style:none}
+.bsw-outline li{padding:9px 0;border-bottom:1px solid rgba(128,128,128,.25)}
+.bsw-ot{font-variant-numeric:tabular-nums;margin-right:6px}
+.bsw-ox{opacity:.8;font-size:.92em}
+.bsw-sub{margin:22px 0 8px}
+.bsw-share{margin-left:8px;align-self:flex-start;padding:2px 8px;font-size:.78em;background:none;border:1px solid rgba(128,128,128,.5);border-radius:6px;color:inherit;cursor:pointer;opacity:0;transition:opacity .15s}
+.bsw-hit:hover .bsw-share,.bsw-share:focus-visible{opacity:1}
+@media (hover:none){.bsw-share{opacity:.7}}
+.bsw-tr-body .bsw-hit:target{background:rgba(255,200,0,.22);border-radius:6px}
+
+/* Přechod z osnovy / sdíleného odkazu na místo v přepisu */
+body .bsw-tr-body .bsw-hit { scroll-margin-top: 90px; }
+body .bsw-tr-body .bsw-hit:target { background: #fff6d6; box-shadow: -6px 0 0 #fff6d6, 6px 0 0 #fff6d6; border-radius: 4px; }
+
+/* Biblické verše v textu (přepis, výpis hledání) odkazují do Bible */
+body .bsw-app .bsw-hit a.bsw-bv { color: var(--bsw-red, #bf0001); font-weight: 600; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; background: rgba(191, 0, 1, 0.07); border-radius: 4px; padding: 0 3px; }
+body .bsw-app .bsw-hit a.bsw-bv::after { content: "\2197"; font-size: 0.72em; margin-left: 2px; vertical-align: super; opacity: 0.8; }
+/* Při najetí text zůstává čitelný (šablona jinak přebarvuje odkazy na červenou) */
+body .bsw-app .bsw-hit a.bsw-bv:hover, body .bsw-app .bsw-hit a.bsw-bv:focus-visible { color: #7a0000 !important; background: rgba(191, 0, 1, 0.18) !important; text-decoration-thickness: 2px; }
